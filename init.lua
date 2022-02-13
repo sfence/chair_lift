@@ -12,3 +12,6 @@ dofile(modpath.."/steel_rope.lua")
 dofile(modpath.."/powered_wheel.lua")
 dofile(modpath.."/chair_lift_entity.lua")
 
+dofile(modpath.."/craftitems.lua")
+dofile(modpath.."/crafting.lua")
+

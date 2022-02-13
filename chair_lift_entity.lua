@@ -28,7 +28,7 @@ local chair_entity = {
     visual = "mesh",
     mesh = "chair_lift_seat.obj",
     visual_size = {x=1,y=1,z=1},
-    textures = {"chair_lift_chair.png"},
+    textures = {"chair_lift_seet.png"},
   },
   driver = nil,
   prev_pos = nil,
@@ -80,7 +80,7 @@ end
 function chair_entity:on_punch(puncher)
   if self.driver==nil then
     local inv = puncher:get_inventory()
-    inv:add_item("main", ItemStack("chair_lift:chair"))
+    inv:add_item("main", ItemStack("chair_lift:seet"))
     self.object:remove()
   end
 end
@@ -237,11 +237,11 @@ function chair_entity:on_step(dtime)
   end
 end
 
-minetest.register_entity("chair_lift:chair", chair_entity)
+minetest.register_entity("chair_lift:seet", chair_entity)
 
-minetest.register_craftitem("chair_lift:chair", {
-    description = S("Chair Lift Chair"),
-    inventory_image = "chair_lift_chair_inv.png",
+minetest.register_craftitem("chair_lift:seet", {
+    description = S("Chair Lift Seet"),
+    inventory_image = "chair_lift_seet_inv.png",
     
     on_place = function (itemstack, placer, pointed_thing)
       if pointed_thing.type~="node" then
@@ -256,8 +256,8 @@ minetest.register_craftitem("chair_lift:chair", {
       end
       
       pos = vector.add(pos, chair_pos_offset)
-      print("Chair to pos: "..minetest.pos_to_string(pos))
-      minetest.add_entity(pos, "chair_lift:chair")
+      --print("Chair to pos: "..minetest.pos_to_string(pos))
+      minetest.add_entity(pos, "chair_lift:seet")
       
       itemstack:take_item()
       return itemstack
