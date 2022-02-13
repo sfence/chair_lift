@@ -93,6 +93,8 @@ minetest.register_node("chair_lift:steel_rope", {
     _steel_rope = {
       forward = {"front"},
       backward = {"back"},
+      forward_offset = vector.new(0,0,-0.5),
+      backward_offset = vector.new(0,0,0.5),
     },
     _steel_rope_place = {
       front = {
@@ -116,7 +118,10 @@ minetest.register_node("chair_lift:steel_rope", {
         },
       },
     },
+    _I = 200,
+    _friction = 0,
     
+    on_rotate = screwdriver.disallow,
     on_place = function(itemstack, placer, pointed_thing)
       local pos = pointed_thing.under
       local node = minetest.get_node(pos)
@@ -135,14 +140,14 @@ minetest.register_node("chair_lift:steel_rope", {
         -- click down/up add vertical going steel rope
         -- click from/back in direction add straight steel rope
         -- click side add horizotnal going steel rope
-        local click_side = appliances.is_connected_to(pos, pointed_thing.above, {"front","back", "right", "left", "top", "bottom"})
+        local click_side = appliances.is_connected_to(pos, node, pointed_thing.above, {"front","back", "right", "left", "top", "bottom"})
         if not click_side then
           local distance = 10000
           local placer_pos = placer:get_pos()
           local best_side
           local test_pos
           for _,test_side in pairs({"front","back","left","top","bottom"}) do
-            test_pos = appliances.get_side_pos(pos, test_side)
+            test_pos = appliances.get_side_pos(pos, node, test_side)
             local test_dist = vector.distance(test_pos, placer_pos)
             if test_dist<=distance then
               distance = test_dist
@@ -163,9 +168,9 @@ minetest.register_node("chair_lift:steel_rope", {
             local test_pos
             for key,test_side in pairs(place.nearest) do
               if type(test_side)=="string" then
-                test_pos = appliances.get_side_pos(pos, test_side)
+                test_pos = appliances.get_side_pos(pos, node, test_side)
               else
-                test_pos = appliances.get_sides_pos(pos, test_side)
+                test_pos = appliances.get_sides_pos(pos, node, test_side)
                 test_side = key
               end
               local test_dist = vector.distance(test_pos, placer_pos)
@@ -182,7 +187,7 @@ minetest.register_node("chair_lift:steel_rope", {
           end
           local param2 = place.param2[node.param2]
           if param2 then
-            target_pos = appliances.get_sides_pos(pos, place.sides)
+            target_pos = appliances.get_sides_pos(pos, node, place.sides)
             new_node = {
               name = place.name,
               param2 = param2
@@ -220,8 +225,11 @@ minetest.register_node("chair_lift:steel_rope_ver", {
     drop = "chair_lift:steel_rope",
     
     _steel_rope = {
-      forward = {"front"},
+      forward = {"front","bottom"},
       backward = {"back"},
+      offset = vector.new(0,0.25,0),
+      forward_offset = vector.new(0,-0.5,-0.5),
+      backward_offset = vector.new(0,0,0.5),
     },
     _steel_rope_place = {
       front = {
@@ -253,6 +261,10 @@ minetest.register_node("chair_lift:steel_rope_ver", {
         },
       },
     },
+    _I = 200,
+    _friction = 0,
+    
+    on_rotate = screwdriver.disallow,
   })
 minetest.register_node("chair_lift:steel_rope_hor", {
     description = S("Steel Rope Horizontal"),
@@ -272,6 +284,8 @@ minetest.register_node("chair_lift:steel_rope_hor", {
     _steel_rope = {
       forward = {"front","right"},
       backward = {"back"},
+      forward_offset = vector.new(-0.5,0,-0.5),
+      backward_offset = vector.new(0,0,0.5),
     },
     _steel_rope_place = {
       front = {
@@ -303,6 +317,10 @@ minetest.register_node("chair_lift:steel_rope_hor", {
         },
       },
     },
+    _I = 200,
+    _friction = 0,
+    
+    on_rotate = screwdriver.disallow,
   })
 minetest.register_node("chair_lift:steel_rope_hor_2", {
     description = S("Steel Rope Horizontal 2"),
@@ -321,7 +339,9 @@ minetest.register_node("chair_lift:steel_rope_hor_2", {
     
     _steel_rope = {
       forward = {"front"},
-      backward = {"back","left"},
+      backward = {"left"},
+      forward_offset = vector.new(0,0,-0.5),
+      backward_offset = vector.new(0.5,0,0),
     },
     _steel_rope_place = {
       front = {
@@ -345,5 +365,9 @@ minetest.register_node("chair_lift:steel_rope_hor_2", {
         },
       },
     },
+    _I = 200,
+    _friction = 0,
+    
+    on_rotate = screwdriver.disallow,
   })
 
