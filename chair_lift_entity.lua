@@ -2,11 +2,18 @@
 local S = chair_lift.translator
 
 local player_set_animation = nil
+local player_set_attached = nil
 
 if minetest.get_modpath("player_api") then
   player_set_animation = player_api.set_animation
-elseif minetes.get_modpath("hades_player") then
+  player_set_attached = function(name, value)
+      player_api.player_attached[name] = value
+    end
+elseif minetest.get_modpath("hades_player") then
   player_set_animation = hades_player.player_set_animation
+  player_set_attached = function(name, value)
+      hades_player.player_attached[name] = value
+    end
 end
 
 local chair_pos_offset = vector.new(-3/16, -2.5+3/16, 0) 
@@ -28,7 +35,7 @@ local chair_entity = {
     visual = "mesh",
     mesh = "chair_lift_seat.obj",
     visual_size = {x=1,y=1,z=1},
-    textures = {"chair_lift_seet.png"},
+    textures = {"chair_lift_seat.png"},
   },
   driver = nil,
   prev_pos = nil,
@@ -45,9 +52,9 @@ function chair_entity:on_activate(staticdata, dtime_s)
     local pos = self.object:get_pos()
     self.prev_pos = vector.new(pos)
     pos = vector.subtract(pos, chair_pos_offset)
-    print("check powered_wheel: "..minetest.pos_to_string(pos))
+    --print("check powered_wheel: "..minetest.pos_to_string(pos))
     self.powered_wheel, self.forward = chair_lift.find_powered_wheel(pos, nil)
-    print("powered_wheel: "..dump(self.powered_wheel))
+    --print("powered_wheel: "..dump(self.powered_wheel))
   end
   self.prev_pos = self.object:get_pos()
 end
@@ -64,14 +71,22 @@ function chair_entity:on_rightclick(clicker)
   if self.driver==nil then
     -- attach
     clicker:set_attach(self.object, "", {x=0,y=0,z=0},{x=0,y=0,z=0})
-    minetest.after(0.1, function() player_set_animation(clicker, "set", 30) end)
+    player_api.player_attached[player_name] = true
+    player_set_attached(player_name, true)
+    minetest.after(0.2, function() 
+        player = minetest.get_player_by_name(player_name)
+        if player then
+          player_set_animation(player, "sit")
+        end
+      end)
     self.driver = player_name
   else
     if self.driver==player_name then
       -- detach
       clicker:set_detach()
       self.driver = nil
-      minetest.after(0.1, function() player_set_animation(clicker, "stand") end)
+      player_set_attached(player_name, nil)
+      player_set_animation(clicker, "stand")
     else
     end
   end
@@ -80,7 +95,7 @@ end
 function chair_entity:on_punch(puncher)
   if self.driver==nil then
     local inv = puncher:get_inventory()
-    inv:add_item("main", ItemStack("chair_lift:seet"))
+    inv:add_item("main", ItemStack("chair_lift:seat"))
     self.object:remove()
   end
 end
@@ -237,11 +252,11 @@ function chair_entity:on_step(dtime)
   end
 end
 
-minetest.register_entity("chair_lift:seet", chair_entity)
+minetest.register_entity("chair_lift:seat", chair_entity)
 
-minetest.register_craftitem("chair_lift:seet", {
-    description = S("Chair Lift Seet"),
-    inventory_image = "chair_lift_seet_inv.png",
+minetest.register_craftitem("chair_lift:seat", {
+    description = S("Chair Lift Seat"),
+    inventory_image = "chair_lift_seat_inv.png",
     
     on_place = function (itemstack, placer, pointed_thing)
       if pointed_thing.type~="node" then
@@ -257,7 +272,7 @@ minetest.register_craftitem("chair_lift:seet", {
       
       pos = vector.add(pos, chair_pos_offset)
       --print("Chair to pos: "..minetest.pos_to_string(pos))
-      minetest.add_entity(pos, "chair_lift:seet")
+      minetest.add_entity(pos, "chair_lift:seat")
       
       itemstack:take_item()
       return itemstack
