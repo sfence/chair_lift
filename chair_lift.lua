@@ -324,6 +324,30 @@ minetest.register_node("chair_lift:pole_arm", {
     sounds = metal_sounds,
   })
 
+minetest.register_node("chair_lift:pole_arm_shaft", {
+    description = S("Tow Pole Arm with Shaft"),
+    tiles = {"chair_lift_pole_steel.png","chair_lift_pole_steel.png","chair_lift_pole_steel.png","chair_lift_pole_steel.png","chair_lift_pole_arm_shaft.png","chair_lift_pole_arm_shaft.png"},
+    paramtype = "light",
+    paramtype2 = "facedir",
+    drawtype = "nodebox",
+    node_box = {
+      type = "fixed",
+      fixed = {
+        {-3/16,-0.5,-0.5, 3/16,0.5,0.5},
+      },
+    },
+    groups = {cracky = 1, level = 2, shaft = 2},
+    sounds = metal_sounds,
+    
+    _shaft_sides = {"front","back"},
+    
+    on_construct = function(pos)
+      local meta = minetest.get_meta(pos)
+      meta:set_float("I", 1)
+      meta:set_float("fric", 0.5)
+    end,
+  })
+
 minetest.register_node("chair_lift:pole_arm_end", {
     description = S("Tow Pole Arm End"),
     tiles = {"chair_lift_pole_steel.png", "chair_lift_wheel_steel.png"},
@@ -362,7 +386,7 @@ minetest.register_node("chair_lift:pole_arm_end_rope", {
     _steel_rope = rope_wheel_steel_rope,
     _steel_rope_place = rope_wheel_steel_rope_place,
     
-    _I = 1000,
+    _I = 10,
     _friction = 0.75,
   })
 

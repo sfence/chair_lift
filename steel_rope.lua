@@ -118,8 +118,8 @@ minetest.register_node("chair_lift:steel_rope", {
         },
       },
     },
-    _I = 200,
-    _friction = 0,
+    _I = 2,
+    _friction = 0.01,
     
     on_rotate = screwdriver.disallow,
     on_place = function(itemstack, placer, pointed_thing)
@@ -261,8 +261,8 @@ minetest.register_node("chair_lift:steel_rope_ver", {
         },
       },
     },
-    _I = 200,
-    _friction = 0,
+    _I = 2,
+    _friction = 0.02,
     
     on_rotate = screwdriver.disallow,
   })
@@ -317,8 +317,8 @@ minetest.register_node("chair_lift:steel_rope_hor", {
         },
       },
     },
-    _I = 200,
-    _friction = 0,
+    _I = 2,
+    _friction = 0.01,
     
     on_rotate = screwdriver.disallow,
   })
@@ -365,8 +365,8 @@ minetest.register_node("chair_lift:steel_rope_hor_2", {
         },
       },
     },
-    _I = 200,
-    _friction = 0,
+    _I = 2,
+    _friction = 0.01,
     
     on_rotate = screwdriver.disallow,
   })

@@ -1,6 +1,5 @@
 
 local items = {
-  steel_wire = "basic_materials:steel_wire",
   empty_spool = "basic_materials:empty_spool",
   steel_gear = "basic_materials:gear_steel",
   steel_block = "default:steelblock",
@@ -26,7 +25,6 @@ if minetest.get_modpath("technic") then
 end
 
 if minetest.get_modpath("hades_extramaterials") then
-  items.steel_wire = "hades_extramaterials:steel_wire"
   items.empty_spool = "hades_extramaterials:empty_spool"
   items.steel_gear = "hades_extramaterials:gear_steel"
 end
@@ -38,20 +36,30 @@ if minetest.get_modpath("hades_technic") then
   items.seat_ingot = "hades_technic:carbon_steel_ingot"
 end
 
+if minetest.get_modpath("technic") or minetest.get_modpath("hades_technic") then
+  minetest.register_craft({
+      output = "chair_lift:stainless_steel_wire 2",
+      recipe = {
+        {items.wheel_ingot,items.empty_spool},
+        {items.empty_spool,""},
+      },
+    })
+end
+
 minetest.register_craft({
     output = "chair_lift:steel_rope 2",
     recipe = {
-        {items.steel_wire,items.steel_wire},
-        {items.steel_wire,items.steel_wire},
-        {items.steel_wire,items.steel_wire},
+        {"chair_lift:stainless_steel_wire","chair_lift:stainless_steel_wire"},
+        {"chair_lift:stainless_steel_wire","chair_lift:stainless_steel_wire"},
+        {"chair_lift:stainless_steel_wire","chair_lift:stainless_steel_wire"},
       },
     replacements = {
-        {items.steel_wire,items.empty_spool},
-        {items.steel_wire,items.empty_spool},
-        {items.steel_wire,items.empty_spool},
-        {items.steel_wire,items.empty_spool},
-        {items.steel_wire,items.empty_spool},
-        {items.steel_wire,items.empty_spool},
+        {"chair_lift:stainless_steel_wire",items.empty_spool},
+        {"chair_lift:stainless_steel_wire",items.empty_spool},
+        {"chair_lift:stainless_steel_wire",items.empty_spool},
+        {"chair_lift:stainless_steel_wire",items.empty_spool},
+        {"chair_lift:stainless_steel_wire",items.empty_spool},
+        {"chair_lift:stainless_steel_wire",items.empty_spool},
       },
   })
 
@@ -70,6 +78,13 @@ minetest.register_craft({
         {items.steel_block},
         {items.steel_block},
         {items.steel_block},
+      },
+  })
+
+minetest.register_craft({
+    output = "chair_lift:pole_arm_shaft",
+    recipe = {
+        {"chair_lift:pole_arm", "power_generators:shaft"},
       },
   })
 

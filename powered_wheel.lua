@@ -329,8 +329,11 @@ wheel_powered:power_data_register(
   {
     ["power_generators_shaft_power"] = {
         run_speed = 1,
-        friction = 1,
-        I = 2000,
+        friction = 5,
+        I = 50,
+        qgrease_max = 3,
+        qgrease_eff = 2,
+        rpm_deactivate = true,
         demand = 1,
         disable = {}
       },
@@ -418,8 +421,6 @@ local node_def = {
     _steel_rope_place = rope_wheel_steel_rope_place,
     
     _shaft_sides = {"front"},
-    _friction = 5,
-    _I = 5000,
     
  }
 
@@ -427,6 +428,7 @@ local node_inactive = {
     tiles = {
         "chair_lift_pole_steel.png",
         "chair_lift_wheel_steel.png",
+        "power_generators_shaft_steel.png",
         "chair_lift_steel_rope.png",
     },
   }
@@ -435,6 +437,7 @@ local node_active = {
     tiles = {
         "chair_lift_pole_steel.png",
         "chair_lift_wheel_steel.png",
+        "power_generators_shaft_steel.png",
         "chair_lift_steel_rope.png",
         {
           image = "chair_lift_wheel_powered_moving_parts_active.png",

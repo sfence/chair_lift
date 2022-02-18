@@ -16,7 +16,7 @@ elseif minetest.get_modpath("hades_player") then
     end
 end
 
-local chair_pos_offset = vector.new(-3/16, -2.5+3/16, 0) 
+local chair_pos_offset = vector.new(0, -2.5+3/16, 0) 
 
 local function get_rotation(param2)
   local dir = minetest.facedir_to_dir(param2)
@@ -62,6 +62,7 @@ end
 function chair_entity:get_staticdata()
   local staticdata = {
     powered_wheel = self.powered_wheel,
+    forward = self.forward,
   }
   return minetest.serialize(staticdata)
 end
@@ -226,6 +227,7 @@ function chair_entity:on_step(dtime)
     self.prev_pos = act_pos
     self.object:set_velocity(vector.multiply(vector.normalize(diff_pos), act_speed))
     -- rotation should be corrected, depend on velocity direction
+    self.object:set_rotation(vector.new(0,minetest.dir_to_yaw(diff_pos),0))
   end
   
   -- check powered wheel
