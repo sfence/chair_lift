@@ -286,7 +286,7 @@ local rope_wheel_steel_rope_place = {
   }
 
 minetest.register_node("chair_lift:pole_body", {
-    description = S("Tow Pole Body"),
+    description = S("Ski Lift Pole Body"),
     tiles = {"chair_lift_pole_steel.png"},
     paramtype = "light",
     drawtype = "nodebox",
@@ -309,7 +309,7 @@ minetest.register_node("chair_lift:pole_body", {
   })
 
 minetest.register_node("chair_lift:pole_arm", {
-    description = S("Tow Pole Arm"),
+    description = S("Ski Lift Pole Arm"),
     tiles = {"chair_lift_pole_steel.png"},
     paramtype = "light",
     paramtype2 = "facedir",
@@ -325,7 +325,7 @@ minetest.register_node("chair_lift:pole_arm", {
   })
 
 minetest.register_node("chair_lift:pole_arm_shaft", {
-    description = S("Tow Pole Arm with Shaft"),
+    description = S("Ski Lift Pole Arm with Shaft"),
     tiles = {"chair_lift_pole_steel.png","chair_lift_pole_steel.png","chair_lift_pole_steel.png","chair_lift_pole_steel.png","chair_lift_pole_arm_shaft.png","chair_lift_pole_arm_shaft.png"},
     paramtype = "light",
     paramtype2 = "facedir",
@@ -349,7 +349,7 @@ minetest.register_node("chair_lift:pole_arm_shaft", {
   })
 
 minetest.register_node("chair_lift:pole_arm_end", {
-    description = S("Tow Pole Arm End"),
+    description = S("Ski Lift Pole Arm End"),
     tiles = {"chair_lift_pole_steel.png", "chair_lift_wheel_steel.png"},
     paramtype = "light",
     paramtype2 = "facedir",
@@ -364,7 +364,7 @@ minetest.register_node("chair_lift:pole_arm_end", {
   })
 
 minetest.register_node("chair_lift:pole_arm_end_rope", {
-    description = S("Tow Pole Arm End Rope"),
+    description = S("Ski Lift Pole Arm End with Rope"),
     tiles = {"chair_lift_pole_steel.png", "chair_lift_wheel_steel.png", "chair_lift_steel_rope.png"},
     paramtype = "light",
     paramtype2 = "facedir",
@@ -376,10 +376,11 @@ minetest.register_node("chair_lift:pole_arm_end_rope", {
     sounds = metal_sounds,
     
     drop = {
-      max_items = 2,
       items = {
-        rarity = 1,
-        items = {"chair_lift:pole_arm_end", "chair_lift:steel_rope"},
+        {
+          rarity = 1,
+          items = {"chair_lift:pole_arm_end", "chair_lift:steel_rope"},
+        }
       }
     },
     

@@ -13,7 +13,7 @@ minetest.register_craftitem("chair_lift:rope_wheel", {
 
 if minetest.get_modpath("technic") or minetest.get_modpath("hades_technic") then
   minetest.register_craftitem("chair_lift:stainless_steel_wire", {
-      description = S("Stainless Steel Wire"),
+      description = S("Spool of Stainless Steel Wire"),
       inventory_image = "chair_lift_stainless_steel_wire.png",
     })
 else

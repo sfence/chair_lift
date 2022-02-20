@@ -121,6 +121,8 @@ minetest.register_node("chair_lift:steel_rope", {
     _I = 2,
     _friction = 0.01,
     
+    node_placement_prediction = "",
+    
     on_rotate = screwdriver.disallow,
     on_place = function(itemstack, placer, pointed_thing)
       local pos = pointed_thing.under

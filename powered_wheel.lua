@@ -274,7 +274,7 @@ local rope_wheel_steel_rope_place = {
   }
 
 minetest.register_node("chair_lift:wheel_powered", {
-    description = S("Chair Lift Powered Wheel"),
+    description = S("Ski Lift Powered Wheel"),
     tiles = {"chair_lift_pole_steel.png", "chair_lift_wheel_steel.png"},
     paramtype = "light",
     paramtype2 = "facedir",
@@ -396,7 +396,7 @@ end
 --]]
 
 minetest.register_node("chair_lift:wheel_powered_rope", {
-    description = S("Chair Lift Powered Wheel Rope"),
+    description = S("Ski Lift Powered Wheel with Rope"),
   })
 
 local node_def = {
@@ -410,10 +410,11 @@ local node_def = {
     sounds = metal_sounds,
     
     drop = {
-      max_items = 2,
       items = {
-        rariry = 1,
-        items = {"chair_lift:wheel_powered", "chair_lift:steel_rope"},
+        {
+          rariry = 1,
+          items = {"chair_lift:wheel_powered", "chair_lift:steel_rope"},
+        }
       }
     },
     
