@@ -440,16 +440,6 @@ local node_active = {
         "chair_lift_wheel_steel.png",
         "power_generators_shaft_steel.png",
         "chair_lift_steel_rope.png",
-        {
-          image = "chair_lift_wheel_powered_moving_parts_active.png",
-          backface_culling = false,
-          animation = {
-            type = "vertical_frames",
-            aspect_w = 16,
-            aspect_h = 16,
-            length = 1.5
-          }
-        }
     },
   }
 
