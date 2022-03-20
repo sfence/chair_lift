@@ -79,7 +79,6 @@ function chair_entity:on_rightclick(clicker)
   if self.driver==nil then
     -- attach
     clicker:set_attach(self.object, "", {x=0,y=0,z=0},{x=0,y=0,z=0})
-    player_api.player_attached[player_name] = true
     player_set_attached(player_name, true)
     minetest.after(0.2, function() 
         player = minetest.get_player_by_name(player_name)
