@@ -24,11 +24,6 @@ if minetest.get_modpath("technic") then
   items.seat_ingot = "technic:carbon_steel_ingot"
 end
 
-if minetest.get_modpath("hades_extramaterials") then
-  items.empty_spool = "hades_extramaterials:empty_spool"
-  items.steel_gear = "hades_extramaterials:gear_steel"
-end
-
 if minetest.get_modpath("hades_technic") then
   items.steel_block = "hades_technic:carbon_steel_block"
   items.wheel_ingot = "hades_technic:stainless_steel_ingot"
