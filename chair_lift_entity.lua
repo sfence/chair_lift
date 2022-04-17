@@ -81,7 +81,7 @@ function chair_entity:on_rightclick(clicker)
     clicker:set_attach(self.object, "", {x=0,y=0,z=0},{x=0,y=0,z=0})
     player_set_attached(player_name, true)
     minetest.after(0.2, function() 
-        player = minetest.get_player_by_name(player_name)
+        local player = minetest.get_player_by_name(player_name)
         if player then
           player_set_animation(player, "sit")
         end
