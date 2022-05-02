@@ -1,5 +1,5 @@
 
--- 
+-- steel rope
 
 local S = chair_lift.translator
 
@@ -158,7 +158,7 @@ minetest.register_node("chair_lift:steel_rope", {
           end
           click_side = best_side
         end
-        local rope = def._steel_rope
+        --local rope = def._steel_rope
         local place = def._steel_rope_place[click_side]
         local target_pos
         local new_node

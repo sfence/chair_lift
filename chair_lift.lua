@@ -1,5 +1,5 @@
 
--- 
+-- chair lift poles
 
 local S = chair_lift.translator
 
@@ -326,7 +326,14 @@ minetest.register_node("chair_lift:pole_arm", {
 
 minetest.register_node("chair_lift:pole_arm_shaft", {
     description = S("Ski Lift Pole Arm with Shaft"),
-    tiles = {"chair_lift_pole_steel.png","chair_lift_pole_steel.png","chair_lift_pole_steel.png","chair_lift_pole_steel.png","chair_lift_pole_arm_shaft.png","chair_lift_pole_arm_shaft.png"},
+    tiles = {
+      "chair_lift_pole_steel.png",
+      "chair_lift_pole_steel.png",
+      "chair_lift_pole_steel.png",
+      "chair_lift_pole_steel.png",
+      "chair_lift_pole_arm_shaft.png",
+      "chair_lift_pole_arm_shaft.png"
+    },
     paramtype = "light",
     paramtype2 = "facedir",
     drawtype = "nodebox",

@@ -16,7 +16,7 @@ elseif minetest.get_modpath("hades_player") then
     end
 end
 
-local chair_pos_offset = vector.new(0, -2.5+3/16, 0) 
+local chair_pos_offset = vector.new(0, -2.5+3/16, 0)
 
 local function get_rotation(param2)
   local dir = minetest.facedir_to_dir(param2)
@@ -48,7 +48,8 @@ local chair_entity = {
   prev_pos = nil,
 }
 
-function chair_entity:on_activate(staticdata, dtime_s)
+--function chair_entity:on_activate(staticdata, dtime_s)
+function chair_entity:on_activate(staticdata)
   self.object:set_armor_groups({immortal=1})
   if staticdata and staticdata~="" then
     staticdata = minetest.deserialize(staticdata)
@@ -80,7 +81,7 @@ function chair_entity:on_rightclick(clicker)
     -- attach
     clicker:set_attach(self.object, "", {x=0,y=0,z=0},{x=0,y=0,z=0})
     player_set_attached(player_name, true)
-    minetest.after(0.2, function() 
+    minetest.after(0.2, function()
         local player = minetest.get_player_by_name(player_name)
         if player then
           player_set_animation(player, "sit")
@@ -94,7 +95,6 @@ function chair_entity:on_rightclick(clicker)
       self.driver = nil
       player_set_attached(player_name, nil)
       player_set_animation(clicker, "stand")
-    else
     end
   end
 end
@@ -128,13 +128,14 @@ function chair_entity:cause_fall(pos)
   return
 end
 
-function chair_entity:on_step(dtime)
+--function chair_entity:on_step(dtime)
+function chair_entity:on_step(_)
   if self.fall then
     return
   end
-  -- 
+  
   local pos = self.object:get_pos()
-  local rpos = vector.subtract(pos, chair_pos_offset)
+  --local rpos = vector.subtract(pos, chair_pos_offset)
   --print("start_pos: "..minetest.pos_to_string(pos))
   local act_speed = vector.length(self.object:get_velocity())
   local track = vector.distance(self.prev_pos, pos)
@@ -158,7 +159,7 @@ function chair_entity:on_step(dtime)
       act_offset = act_def._steel_rope.backward_offset
     end
     -- reduce track
-    local act_dir = minetest.facedir_to_dir(act_node.param2%32)
+    --local act_dir = minetest.facedir_to_dir(act_node.param2%32)
     local act_rot = get_rotation(act_node.param2%32)
     --print("dir: "..minetest.pos_to_string(act_dir).." param2: "..act_node.param2.." rot: "..minetest.pos_to_string(vector.dir_to_rotation(act_dir)).." rot2: "..minetest.pos_to_string(get_rotation(act_node.param2%32)))
     --print("offset: "..minetest.pos_to_string(act_offset).." from "..act_node.name.." forward "..dump(self.forward))
@@ -203,7 +204,7 @@ function chair_entity:on_step(dtime)
         act_offset = act_def._steel_rope.backward_offset
       end
       
-      act_dir = minetest.facedir_to_dir(act_node.param2%32)
+      --act_dir = minetest.facedir_to_dir(act_node.param2%32)
       act_rot = get_rotation(act_node.param2%32)
       --print("dir: "..minetest.pos_to_string(act_dir).." param2: "..act_node.param2.." rot: "..minetest.pos_to_string(vector.dir_to_rotation(act_dir)))
       --print("offset: "..minetest.pos_to_string(act_offset).." from "..act_node.name)
@@ -269,7 +270,8 @@ minetest.register_craftitem("chair_lift:seat", {
     description = S("Chair Lift Seat"),
     inventory_image = "chair_lift_seat_inv.png",
     
-    on_place = function (itemstack, placer, pointed_thing)
+    --on_place = function (itemstack, placer, pointed_thing)
+    on_place = function (itemstack, _, pointed_thing)
       if pointed_thing.type~="node" then
         return itemstack
       end

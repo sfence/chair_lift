@@ -18,7 +18,7 @@ function chair_lift.find_powered_wheel(pos, node)
   local act_node = node
   local act_def
   local next_pos
-  for i=0,find_limit do
+  for _=0,find_limit do
     act_def = minetest.registered_nodes[act_node.name]
     if not act_def or not act_def._steel_rope then
       return nil, nil
@@ -75,7 +75,7 @@ function chair_lift.measure_rope(pos, node)
   local act_node = node
   local act_def
   local next_pos
-  for i=0,find_limit do
+  for _=0,find_limit do
     act_def = minetest.registered_nodes[act_node.name]
     if not act_def or not act_def._steel_rope then
       return nil, nil

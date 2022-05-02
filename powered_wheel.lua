@@ -294,7 +294,7 @@ chair_lift.wheel_powered = appliances.appliance:new(
       node_name_active = "chair_lift:wheel_powered_rope_active",
       
       node_description = S("Chair Lift Powered Wheel Rope"),
-    	node_help = S("Connect to power (@1).", "25 EU").."\n"..S("Use this for generate 150 unit of energy.").."\n"..S("Startup and Shutdown by punch."),
+      node_help = S("Connect to power (@1).", "25 EU").."\n"..S("Use this for generate 150 unit of energy.").."\n"..S("Startup and Shutdown by punch."),
       
       input_stack_size = 0,
       have_input = false,
@@ -343,7 +343,8 @@ wheel_powered:power_data_register(
 -- Formspec --
 --------------
 
-function wheel_powered:get_formspec(meta, production_percent, consumption_percent)
+--function wheel_powered:get_formspec(meta, production_percent, consumption_percent)
+function wheel_powered:get_formspec()
   return "";
 end
 
