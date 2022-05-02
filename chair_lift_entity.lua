@@ -102,7 +102,10 @@ end
 function chair_entity:on_punch(puncher)
   if self.driver==nil then
     local inv = puncher:get_inventory()
-    inv:add_item("main", ItemStack("chair_lift:seat"))
+    local noadd = inv:add_item("main", ItemStack("chair_lift:seat"))
+    if noadd:get_count()>0 then
+      minetest.add_item(puncher:get_pos(), noadd)
+    end
     self.object:remove()
   end
 end
