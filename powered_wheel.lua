@@ -304,6 +304,8 @@ chair_lift.wheel_powered = appliances.appliance:new(
       
       power_connect_sides = {"back"},
       
+      _shaft_types = {back="steel"},
+      
       sounds = {
         active_running = {
           sound = "chair_lift_wheel_powered_running",
@@ -421,8 +423,6 @@ local node_def = {
     
     _steel_rope = rope_wheel_steel_rope,
     _steel_rope_place = rope_wheel_steel_rope_place,
-    
-    _shaft_sides = {"front"},
     
  }
 

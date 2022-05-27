@@ -347,6 +347,7 @@ minetest.register_node("chair_lift:pole_arm_shaft", {
     sounds = metal_sounds,
     
     _shaft_sides = {"front","back"},
+    _shaft_types = {front="steel",back="steel"},
     
     on_construct = function(pos)
       local meta = minetest.get_meta(pos)
