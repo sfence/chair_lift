@@ -1,19 +1,10 @@
 
 local S = chair_lift.translator
 
-local player_set_animation = nil
-local player_set_attached = nil
+local player_mod = chair_lift.adaptation.player_mod
 
-if minetest.get_modpath("player_api") then
-  player_set_animation = player_api.set_animation
-  player_set_attached = function(name, value)
-      player_api.player_attached[name] = value
-    end
-elseif minetest.get_modpath("hades_player") then
-  player_set_animation = hades_player.player_set_animation
-  player_set_attached = function(name, value)
-      hades_player.player_attached[name] = value
-    end
+if (not adaptation_lib.check_keys_aviable("[chair_lift] chair lift entity:", chair_lift.adaptation, {"player_mod"})) then
+  return
 end
 
 local chair_pos_offset = vector.new(0, -2.5+3/16, 0)
@@ -80,11 +71,11 @@ function chair_entity:on_rightclick(clicker)
   if self.driver==nil then
     -- attach
     clicker:set_attach(self.object, "", {x=0,y=0,z=0},{x=0,y=0,z=0})
-    player_set_attached(player_name, true)
+    player_mod.attach_player(player_name, true)
     minetest.after(0.2, function()
         local player = minetest.get_player_by_name(player_name)
         if player then
-          player_set_animation(player, "sit")
+          player_mod.set_animation(player, "sit")
         end
       end)
     self.driver = player_name
@@ -93,8 +84,8 @@ function chair_entity:on_rightclick(clicker)
       -- detach
       clicker:set_detach()
       self.driver = nil
-      player_set_attached(player_name, nil)
-      player_set_animation(clicker, "stand")
+      player_mod.deattach_player(player_name, nil)
+      player_mod.set_animation(clicker, "stand")
     end
   end
 end
@@ -120,7 +111,7 @@ function chair_entity:cause_fall(pos)
     local player = minetest.get_player_by_name(self.driver)
     if player then
       player:set_detach()
-      minetest.after(0.1, function() player_set_animation(player, "stand") end)
+      minetest.after(0.1, function() player_mod.set_animation(player, "stand") end)
     end
     self.driver = nil
   end

@@ -3,6 +3,8 @@
 
 local S = chair_lift.translator
 
+local adaptation = chair_lift.adaptation
+
 local metal_sounds = nil
 if minetest.get_modpath("sounds") then
   metal_sounds = sounds.node_metal()
@@ -123,7 +125,7 @@ minetest.register_node("chair_lift:steel_rope", {
     
     node_placement_prediction = "",
     
-    on_rotate = screwdriver.disallow,
+    on_rotate = adaptation.screwdriver_mod.disallow,
     on_place = function(itemstack, placer, pointed_thing)
       local pos = pointed_thing.under
       local node = minetest.get_node(pos)
@@ -266,7 +268,7 @@ minetest.register_node("chair_lift:steel_rope_ver", {
     _I = 2,
     _friction = 0.02,
     
-    on_rotate = screwdriver.disallow,
+    on_rotate = adaptation.screwdriver_mod.disallow,
   })
 minetest.register_node("chair_lift:steel_rope_hor", {
     description = S("Steel Rope Horizontal"),
@@ -322,7 +324,7 @@ minetest.register_node("chair_lift:steel_rope_hor", {
     _I = 2,
     _friction = 0.01,
     
-    on_rotate = screwdriver.disallow,
+    on_rotate = adaptation.screwdriver_mod.disallow,
   })
 minetest.register_node("chair_lift:steel_rope_hor_2", {
     description = S("Steel Rope Horizontal 2"),
@@ -370,6 +372,6 @@ minetest.register_node("chair_lift:steel_rope_hor_2", {
     _I = 2,
     _friction = 0.01,
     
-    on_rotate = screwdriver.disallow,
+    on_rotate = adaptation.screwdriver_mod.disallow,
   })
 

@@ -1,73 +1,42 @@
 
-local items = {
-  empty_spool = "basic_materials:empty_spool",
-  steel_gear = "basic_materials:gear_steel",
-  steel_wire = "basic_materials:steel_wire",
-  steel_block = "default:steelblock",
-  wheel_ingot = "default:steel_ingot",
-  seat_block = "default:steelblock",
-  seat_ingot = "default:steel_ingot",
-  seat_glass = "default:glass",
-}
+local adaptation = chair_lift.adaptation
 
-if minetest.get_modpath("hades_core") then
-  items.steel_block = "hades_core:steelblock"
-  items.wheel_ingot = "hades_core:steel_ingot"
-  items.seat_block = "hades_core:steelblock"
-  items.seat_ingot = "hades_core:steel_ingot"
-  items.seat_glass = "hades_core:glass"
-end
+local N = adaptation_lib.get_item_name
 
-if minetest.get_modpath("technic") then
-  items.steel_block = "technic:carbon_steel_block"
-  items.wheel_ingot = "technic:stainless_steel_ingot"
-  items.seat_block = "technic:carbon_steel_block"
-  items.seat_ingot = "technic:carbon_steel_ingot"
-  
-  items.steel_wire = "basic_materials:stainless_steel_wire"
-end
-
-if minetest.get_modpath("hades_technic") then
-  items.steel_block = "hades_technic:carbon_steel_block"
-  items.wheel_ingot = "hades_technic:stainless_steel_ingot"
-  items.seat_block = "hades_technic:carbon_steel_block"
-  items.seat_ingot = "hades_technic:carbon_steel_ingot"
-  
-  items.steel_wire = "basic_materials:stainless_steel_wire"
-end
+adaptation_lib.check_keys_aviable("[chair_lift] Crafting: ", adaptation, {"steel_wire", "empty_spool", "steel_block", "steel_gear", "wheel_ingot", "seat_ingot", "seat_block", "seat_glass"})
 
 minetest.register_craft({
     output = "chair_lift:steel_rope 2",
     recipe = {
-        {items.steel_wire,items.steel_wire},
-        {items.steel_wire,items.steel_wire},
-        {items.steel_wire,items.steel_wire},
+        {N(adaptation.steel_wire),N(adaptation.steel_wire)},
+        {N(adaptation.steel_wire),N(adaptation.steel_wire)},
+        {N(adaptation.steel_wire),N(adaptation.steel_wire)},
       },
     replacements = {
-        {items.steel_wire,items.empty_spool},
-        {items.steel_wire,items.empty_spool},
-        {items.steel_wire,items.empty_spool},
-        {items.steel_wire,items.empty_spool},
-        {items.steel_wire,items.empty_spool},
-        {items.steel_wire,items.empty_spool},
+        {N(adaptation.steel_wire),N(adaptation.empty_spool)},
+        {N(adaptation.steel_wire),N(adaptation.empty_spool)},
+        {N(adaptation.steel_wire),N(adaptation.empty_spool)},
+        {N(adaptation.steel_wire),N(adaptation.empty_spool)},
+        {N(adaptation.steel_wire),N(adaptation.empty_spool)},
+        {N(adaptation.steel_wire),N(adaptation.empty_spool)},
       },
   })
 
 minetest.register_craft({
     output = "chair_lift:pole_body 9",
     recipe = {
-        {items.steel_block, items.steel_block},
-        {items.steel_block, items.steel_block},
-        {items.steel_block, items.steel_block},
+        {N(adaptation.steel_block), N(adaptation.steel_block)},
+        {N(adaptation.steel_block), N(adaptation.steel_block)},
+        {N(adaptation.steel_block), N(adaptation.steel_block)},
       },
   })
 
 minetest.register_craft({
     output = "chair_lift:pole_arm 9",
     recipe = {
-        {items.steel_block},
-        {items.steel_block},
-        {items.steel_block},
+        {N(adaptation.steel_block)},
+        {N(adaptation.steel_block)},
+        {N(adaptation.steel_block)},
       },
   })
 
@@ -81,9 +50,9 @@ minetest.register_craft({
 minetest.register_craft({
     output = "chair_lift:wheel_part",
     recipe = {
-        {"",items.wheel_ingot,""},
-        {items.wheel_ingot,"",items.wheel_ingot},
-        {"",items.wheel_ingot,""},
+        {"",N(adaptation.wheel_ingot),""},
+        {N(adaptation.wheel_ingot),"",N(adaptation.wheel_ingot)},
+        {"",N(adaptation.wheel_ingot),""},
       },
   })
 
@@ -91,7 +60,7 @@ minetest.register_craft({
     output = "chair_lift:rope_wheel",
     recipe = {
         {"chair_lift:wheel_part"},
-        {items.wheel_ingot},
+        {N(adaptation.wheel_ingot)},
         {"chair_lift:wheel_part"},
       },
   })
@@ -108,7 +77,7 @@ minetest.register_craft({
     output = "chair_lift:wheel_powered",
     recipe = {
         {"","chair_lift:pole_arm",""},
-        {items.steel_gear,"power_generators:shaft",items.steel_gear},
+        {N(adaptation.steel_gear),"power_generators:shaft",N(adaptation.steel_gear)},
         {"","chair_lift:rope_wheel",""},
       },
   })
@@ -116,9 +85,9 @@ minetest.register_craft({
 minetest.register_craft({
     output = "chair_lift:seat",
     recipe = {
-        {"chair_lift:rope_wheel",items.seat_ingot,"chair_lift:rope_wheel"},
-        {items.seat_ingot,"power_generators:shaft",""},
-        {items.seat_block,items.seat_glass,""},
+        {"chair_lift:rope_wheel",N(adaptation.seat_ingot),"chair_lift:rope_wheel"},
+        {N(adaptation.seat_ingot),"power_generators:shaft",""},
+        {N(adaptation.seat_block),N(adaptation.seat_glass),""},
       },
   })
 

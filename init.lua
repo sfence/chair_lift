@@ -5,6 +5,8 @@ chair_lift = {
 
 local modpath = minetest.get_modpath(minetest.get_current_modname())
 
+dofile(modpath.."/adaptation.lua")
+
 dofile(modpath.."/functions.lua")
 
 dofile(modpath.."/chair_lift.lua")
